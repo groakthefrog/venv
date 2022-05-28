@@ -1,0 +1,102 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/main_menu/main_menu.gd" type="Script" id=1]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 253.0
+margin_top = 230.0
+margin_right = 359.0
+margin_bottom = 278.0
+
+[node name="VSeparator" type="HSplitContainer" parent="VBoxContainer"]
+margin_right = 106.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+collapsed = true
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/VSeparator"]
+margin_top = 5.0
+margin_right = 30.0
+margin_bottom = 19.0
+size_flags_horizontal = 8
+text = "port:"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/VSeparator"]
+margin_left = 38.0
+margin_right = 106.0
+margin_bottom = 24.0
+placeholder_text = "25565"
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+margin_top = 28.0
+margin_right = 106.0
+margin_bottom = 48.0
+text = "create session"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+margin_left = 645.0
+margin_top = 224.0
+margin_right = 784.0
+margin_bottom = 300.0
+
+[node name="VSeparator" type="HSplitContainer" parent="VBoxContainer2"]
+margin_right = 139.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+collapsed = true
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="VBoxContainer2/VSeparator"]
+margin_top = 5.0
+margin_right = 54.0
+margin_bottom = 19.0
+size_flags_horizontal = 8
+text = "address:"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer2/VSeparator"]
+margin_left = 62.0
+margin_right = 139.0
+margin_bottom = 24.0
+placeholder_text = "127.0.0.1"
+
+[node name="VSeparator2" type="HSplitContainer" parent="VBoxContainer2"]
+margin_top = 28.0
+margin_right = 139.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+collapsed = true
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="VBoxContainer2/VSeparator2"]
+margin_top = 5.0
+margin_right = 30.0
+margin_bottom = 19.0
+size_flags_horizontal = 8
+text = "port:"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer2/VSeparator2"]
+margin_left = 38.0
+margin_right = 139.0
+margin_bottom = 24.0
+placeholder_text = "25565"
+
+[node name="Button" type="Button" parent="VBoxContainer2"]
+margin_top = 56.0
+margin_right = 139.0
+margin_bottom = 76.0
+text = "join session"
