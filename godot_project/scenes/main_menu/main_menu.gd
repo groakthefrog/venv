@@ -1,10 +1,14 @@
 extends Control
 
-export(NodePath) onready var create_session_port = Util.A(get_node(notification_path) as LineEdit)
-export(NodePath) onready var notification_path   = Util.A(get_node(notification_path) as Control)
+export(NodePath) onready var _create_session_port = Util.A(get_node(_create_session_port) as LineEdit)
+export(NodePath) onready var _notification_path   = Util.A(get_node(_notification_path) as Control)
 
 func _on_create_session_pressed()->void:
-	if create_session_port.text.is_valid_integer():
-		Manager.create_session(int(create_session_port.text))
+	if _create_session_port.text.is_valid_integer():
+		if Manager.create_session(int(_create_session_port.text)):
+			pass # error creating session
 	else:
-		pass
+		pass # port is not number
+
+func _on_join_session_pressed()->void:
+	pass
