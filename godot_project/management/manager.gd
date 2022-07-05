@@ -1,57 +1,31 @@
 extends Node
 
-# autoload
+# autoload Manager
+# Sets correct current scene based on venv state
 
-enum {
-	STATE_DISCONNECTED
-	STATE_VIEWING
-	STATE_STARTING
-	STATE_NORMAL
-}
+const _LOADING_SCENE: PackedScene = preload("res://scenes/loading_scene/loading_scene.tscn")
+const _CONTROL_SCENE: PackedScene = preload("res://scenes/control_scene/control_scene.tscn")
+const _VIEWER_SCENE: PackedScene = preload("res://scenes/viewer_scene/viewer_scene.tscn")
+const _MAIN_MENU_SCENE: PackedScene = preload("res://scenes/main_scene/main_scene.tscn")
 
-const _VIEWER_SCENE: PackedScene = preload("res://scenes/main_scene/main_scene.tscn")
-#const _LOADING_SCENE: PackedScene = preload("res://scenes/main_scene/main_scene.tscn")
+var _is_viewer: bool = false
+func is_viewer()->bool: return _is_viewer
 
+func _ready():
+	Venv.connect("state_changed", self, "_on_venv_state_changed")
 
-var _server_port: int = -1
-var _peer: NetworkedMultiplayerENet = null
+func _on_venv_state_changed(new_state:int)->void:
+	_switch_to_state_scene(new_state)
 
-mastersync var _state: int = STATE_DISCONNECTED
-
-func create_session(port:int)->int:
-	if _peer:
-		return ERR_ALREADY_EXISTS # peer already created!
-	_peer = NetworkedMultiplayerENet.new()
-	var err := _peer.create_server(port)
-	if err:
-		return err
-	get_tree().network_peer = _peer
-	return OK
-
-func join_session(address:String, port:int)->int:
-	if _peer:
-		return ERR_ALREADY_EXISTS # peer already created!
-	_peer = NetworkedMultiplayerENet.new()
-	var err := _peer.create_client(address, port)
-	if err:
-		return err
-	get_tree().network_peer = _peer
-	return OK
-
-func disconnect_session():
-	if _peer:
-		_peer.close_connection()
-		get_tree().network_peer = null
-
-func _on_state_change()->void:
-	_switch_to_current_state_scene()
-
-func _switch_to_current_state_scene()->void:
-	match _state:
-		STATE_DISCONNECTED:
-			pass
-		STATE_STARTING:
-			pass
-		STATE_VIEWING:
-			SceneManager.change_scene_to(_VIEWER_SCENE)
+func _switch_to_state_scene(state:int)->void:
+	match state:
+		Venv.STATE_DISCONNECTED:
+			SceneManager.change_scene_to(_MAIN_MENU_SCENE)
+		Venv.STATE_STARTING:
+			SceneManager.change_scene_to(_LOADING_SCENE, {cancel_scene = _MAIN_MENU_SCENE})
+		Venv.STATE_NORMAL:
+			if _is_viewer:
+				SceneManager.change_scene_to(_VIEWER_SCENE)
+			else:
+				SceneManager.change_scene_to(_CONTROL_SCENE)
 
