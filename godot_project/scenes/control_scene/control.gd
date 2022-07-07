@@ -9,7 +9,6 @@ func _ready():
 	_file_dialog.connect("file_selected", self, "_on_file_selected")
 
 func _on_add_menu_button_pressed(idx:int)->void:
-	print(_add_popup_menu.get_item_text(idx))
 	match _add_popup_menu.get_item_text(idx):
 		"New Puppet":
 			_add_new_puppet_from_file()
@@ -21,4 +20,4 @@ func _add_new_puppet_from_file()->void:
 func _on_file_selected(file:String)->void:
 	var vrm: PackedScene = load(file)
 	var instance: Node = vrm.instance()
-	Venv._local_scene.add_child(instance) # @todo remove this
+	Venv._add_object(instance) # @todo remove this

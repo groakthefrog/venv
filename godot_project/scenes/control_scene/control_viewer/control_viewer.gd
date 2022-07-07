@@ -8,6 +8,7 @@ func _ready():
 	_viewport.size = rect_size
 
 func _on_resized():
+
 	_viewport.size = rect_size
 
 func _on_viewport_gui_input(event:InputEvent)->void:

@@ -11,17 +11,15 @@ enum {
 
 const _DEFAULT_VENV_SCENE: PackedScene = preload("res://venv/venv_scene.tscn")
 
-var _local_scene: Node setget, get_local_scene
-func get_local_scene()->Node: return _local_scene
+var local_scene: Node setget, get_local_scene
+func get_local_scene()->Node: return local_scene
 var _server_port: int = -1
 var _peer: NetworkedMultiplayerENet = null
-
+var _state: int = STATE_DISCONNECTED
 var _objects := []
 
-mastersync var _state: int = STATE_DISCONNECTED
-
 signal state_changed(new_state)
-signal object_added(new_object)
+signal venv_changed()
 
 func create_session(port:int, blahblahvenvdata = null)->int:
 	if _peer:
@@ -31,12 +29,14 @@ func create_session(port:int, blahblahvenvdata = null)->int:
 	if err:
 		return err
 	get_tree().network_peer = _peer
-	_change_state(STATE_NORMAL)
+
 	if blahblahvenvdata:
 		pass # @todo add session creation data initalization
 	else:
-		_local_scene = _DEFAULT_VENV_SCENE.instance()
-		add_child(_local_scene)
+		local_scene = _DEFAULT_VENV_SCENE.instance()
+		add_child(local_scene)
+
+	_change_state(STATE_NORMAL)
 	return OK
 
 
@@ -57,13 +57,16 @@ func disconnect_session():
 		_peer.close_connection()
 		get_tree().network_peer = null
 		_change_state(STATE_DISCONNECTED)
-		remove_child(_local_scene)
-		_local_scene = null
+		remove_child(local_scene)
+		local_scene = null
 
-
-func _add_object()->void:
-	#emit_signal()
+func _process(delta:float)->void:
 	pass
+
+
+func _add_object(object:Node)->void:
+	local_scene.add_child(object)
+	emit_signal("venv_changed")
 
 
 func _change_state(new_state:int):
