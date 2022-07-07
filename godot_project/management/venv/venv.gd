@@ -63,7 +63,6 @@ func disconnect_session():
 func _process(delta:float)->void:
 	pass
 
-
 func _add_object(object:Node)->void:
 	local_scene.add_child(object)
 	emit_signal("venv_changed")

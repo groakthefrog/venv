@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/control_scene/control_viewer/control_viewer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/control_scene/control.gd" type="Script" id=2]
 [ext_resource path="res://scenes/control_scene/scripts/object_tree.gd" type="Script" id=3]
+[ext_resource path="res://scenes/control_scene/inspector.gd" type="Script" id=4]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -122,22 +123,23 @@ custom_constants/margin_top = 4
 custom_constants/margin_left = 4
 custom_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HBoxContainer/MarginContainer2/MarginContainer"]
+[node name="VBoxContainer" type="TabContainer" parent="Control/HBoxContainer/MarginContainer2/MarginContainer"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 414.0
 margin_bottom = 566.0
-custom_constants/separation = 2
+tab_align = 0
 
-[node name="Label" type="Label" parent="Control/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
-margin_right = 410.0
-margin_bottom = 14.0
-text = "Objects"
-
-[node name="Tree" type="Tree" parent="Control/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
-margin_top = 16.0
-margin_right = 410.0
-margin_bottom = 17.0
+[node name="Inspector" type="VBoxContainer" parent="Control/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_vertical = 3
+script = ExtResource( 4 )
+_tree = NodePath("../../../../HSplitContainer/MarginContainer/VBoxContainer/Tree")
 
 [node name="FileDialog" type="FileDialog" parent="."]
 margin_left = 124.0

@@ -16,4 +16,4 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="Camera" type="Camera" parent="Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.06487 )
+transform = Transform( 0.88647, 0, -0.462786, 0, 1, 0, 0.462786, 0, 0.88647, -2.94194, 0.876835, 3.06487 )

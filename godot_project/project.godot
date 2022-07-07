@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Object",
+"class": "Constants",
+"language": "GDScript",
+"path": "res://constants.gd"
+}, {
 "base": "",
 "class": "EditorSceneImporterGLTF",
 "language": "NativeScript",
@@ -98,8 +103,14 @@ _global_script_classes=[ {
 "class": "VenvAsset",
 "language": "GDScript",
 "path": "res://management/venv/venv_asset.gd"
+}, {
+"base": "Spatial",
+"class": "VenvObj",
+"language": "GDScript",
+"path": "res://management/venv/venv_obj.gd"
 } ]
 _global_script_class_icons={
+"Constants": "",
 "EditorSceneImporterGLTF": "",
 "GLTFAccessor": "",
 "GLTFAnimation": "",
@@ -117,7 +128,8 @@ _global_script_class_icons={
 "PackedSceneGLTF": "",
 "Util": "",
 "VRMTopLevel": "",
-"VenvAsset": ""
+"VenvAsset": "",
+"VenvObj": ""
 }
 
 [application]
