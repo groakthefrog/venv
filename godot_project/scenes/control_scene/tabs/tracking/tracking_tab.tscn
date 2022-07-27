@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/control_scene/tabs/tracking/tracking_tab.gd" type="Script" id=1]
+
+[node name="Tracking" type="ScrollContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+_python_executable_edit = NodePath("VBoxContainer/HBoxContainer/LineEdit")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 180.0
+margin_bottom = 24.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 180.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 118.0
+margin_bottom = 19.0
+text = "python executable"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+margin_left = 122.0
+margin_right = 180.0
+margin_bottom = 24.0

@@ -15,11 +15,21 @@ var local_scene: Node setget, get_local_scene
 func get_local_scene()->Node: return local_scene
 var _server_port: int = -1
 var _peer: NetworkedMultiplayerENet = null
-var _state: int = STATE_DISCONNECTED
+var state: int = STATE_DISCONNECTED setget, get_state
+func get_state()->int: return state
 var _objects := []
+
+var _controller: ControllerManager
+func get_contorller(): return _controller
 
 signal state_changed(new_state)
 signal venv_changed()
+
+
+func create_controller()->void:
+	if state == STATE_NORMAL:
+		_controller = ControllerManager.new()
+		add_child(_controller)
 
 func create_session(port:int, blahblahvenvdata = null)->int:
 	if _peer:
@@ -52,7 +62,7 @@ func join_session(address:String, port:int)->int:
 	return OK
 
 
-func disconnect_session():
+func disconnect_session()->void:
 	if _peer:
 		_peer.close_connection()
 		get_tree().network_peer = null
@@ -60,14 +70,18 @@ func disconnect_session():
 		remove_child(local_scene)
 		local_scene = null
 
-func _process(delta:float)->void:
-	pass
 
 func _add_object(object:Node)->void:
-	local_scene.add_child(object)
+	var obj_name := "Venv Object"
+	if object is VRMTopLevel and object.vrm_meta and object.vrm_meta.title:
+		obj_name = object.vrm_meta.title
+	var vo := VenvObj.new()
+	vo.add_child(object)
+	vo.name = obj_name
+	local_scene.add_child(vo)
 	emit_signal("venv_changed")
 
 
 func _change_state(new_state:int):
-	_state = new_state
+	state = new_state
 	emit_signal("state_changed", new_state)

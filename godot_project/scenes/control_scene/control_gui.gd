@@ -10,12 +10,14 @@ func _ready():
 	_add_popup_menu.connect("index_pressed", self, "_on_add_menu_button_pressed")
 	_file_dialog.connect("file_selected", self, "_on_file_selected")
 
+
 func _on_add_menu_button_pressed(idx:int)->void:
 	match _add_popup_menu.get_item_text(idx):
 		"New Puppet":
 			_add_new_puppet_from_file()
 		"New Object":
 			_add_test_object()
+
 
 func _add_new_puppet_from_file()->void:
 	(_file_dialog as FileDialog).show()
@@ -29,7 +31,4 @@ func _on_file_selected(file:String)->void:
 
 func _add_test_object()->void:
 	var instance := _TEST_OBJECT.instance()
-
-	var vo := VenvObj.new()
-	vo.add_child(instance)
-	Venv._add_object(vo) # @todo remove this
+	Venv._add_object(instance) # @todo remove this

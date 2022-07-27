@@ -9,10 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "CommandData",
+"language": "GDScript",
+"path": "res://addons/gift/util/cmd_data.gd"
+}, {
+"base": "Reference",
+"class": "CommandInfo",
+"language": "GDScript",
+"path": "res://addons/gift/util/cmd_info.gd"
+}, {
 "base": "Object",
 "class": "Constants",
 "language": "GDScript",
 "path": "res://constants.gd"
+}, {
+"base": "Node",
+"class": "ControllerManager",
+"language": "GDScript",
+"path": "res://management/controller_manager.gd"
 }, {
 "base": "",
 "class": "EditorSceneImporterGLTF",
@@ -84,10 +99,25 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://addons/godot_gltf/GLTFTexture.gdns"
 }, {
+"base": "Node",
+"class": "Gift",
+"language": "GDScript",
+"path": "res://addons/gift/gift_node.gd"
+}, {
+"base": "Resource",
+"class": "ImageCache",
+"language": "GDScript",
+"path": "res://addons/gift/util/image_cache.gd"
+}, {
 "base": "",
 "class": "PackedSceneGLTF",
 "language": "NativeScript",
 "path": "res://addons/godot_gltf/PackedSceneGLTF.gdns"
+}, {
+"base": "Reference",
+"class": "SenderData",
+"language": "GDScript",
+"path": "res://addons/gift/util/sender_data.gd"
 }, {
 "base": "Object",
 "class": "Util",
@@ -110,7 +140,10 @@ _global_script_classes=[ {
 "path": "res://management/venv/venv_obj.gd"
 } ]
 _global_script_class_icons={
+"CommandData": "",
+"CommandInfo": "",
 "Constants": "",
+"ControllerManager": "",
 "EditorSceneImporterGLTF": "",
 "GLTFAccessor": "",
 "GLTFAnimation": "",
@@ -125,7 +158,10 @@ _global_script_class_icons={
 "GLTFSpecGloss": "",
 "GLTFState": "",
 "GLTFTexture": "",
+"Gift": "",
+"ImageCache": "",
 "PackedSceneGLTF": "",
+"SenderData": "",
 "Util": "",
 "VRMTopLevel": "",
 "VenvAsset": "",
@@ -143,6 +179,8 @@ config/icon="res://icon.png"
 SceneManager="*res://management/scene_manager.gd"
 Manager="*res://management/manager.gd"
 Venv="*res://management/venv/venv.gd"
+UniqueObjectManager="*res://management/unique_object_manager.gd"
+EventManager="*res://management/event_manager.gd"
 
 [editor_plugins]
 

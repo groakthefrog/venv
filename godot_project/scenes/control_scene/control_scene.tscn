@@ -1,13 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/control_scene/control_viewer/control_viewer.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/control_scene/control.gd" type="Script" id=2]
+[ext_resource path="res://scenes/control_scene/control_gui.gd" type="Script" id=2]
 [ext_resource path="res://scenes/control_scene/scripts/object_tree.gd" type="Script" id=3]
 [ext_resource path="res://scenes/control_scene/inspector.gd" type="Script" id=4]
+[ext_resource path="res://management/controller_manager.gd" type="Script" id=5]
+[ext_resource path="res://scenes/control_scene/tabs/twitch_tab/twitch_tab.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/control_scene/tabs/tracking/tracking_tab.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/control_scene/tabs/events_tab/events_tab.tscn" type="PackedScene" id=8]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -130,7 +135,14 @@ margin_right = 414.0
 margin_bottom = 566.0
 tab_align = 0
 
+[node name="Events" parent="Control/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer" instance=ExtResource( 8 )]
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
 [node name="Inspector" type="VBoxContainer" parent="Control/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -140,6 +152,16 @@ margin_bottom = -4.0
 size_flags_vertical = 3
 script = ExtResource( 4 )
 _tree = NodePath("../../../../HSplitContainer/MarginContainer/VBoxContainer/Tree")
+
+[node name="Twitch" parent="Control/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
+visible = false
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Tracking" parent="Control/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer" instance=ExtResource( 7 )]
+visible = false
 
 [node name="FileDialog" type="FileDialog" parent="."]
 margin_left = 124.0
